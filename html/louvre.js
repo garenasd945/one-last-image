@@ -21,13 +21,13 @@ let scale = width / height;
 let lastConfigString = null;
 
 const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
 const canvasShade = document.createElement('canvas');
 const canvasShadeMin = document.createElement('canvas');
 const canvasMin = document.createElement('canvas');
 const pencilTextureCanvas = document.createElement('canvas');
 
-const louvre = async ({img, outputCanvas, config, callback}) => {
+const louvre = async ({img, outputCanvas, config}) => {
 	if (!img || !config) return;
 
 	const configString = [
@@ -149,7 +149,7 @@ const louvre = async ({img, outputCanvas, config, callback}) => {
 		// 载入纹理
 		pencilTextureCanvas.width = _width;
 		pencilTextureCanvas.height = _height;
-		const pencilTextureCtx = pencilTextureCanvas.getContext('2d');
+		const pencilTextureCtx = pencilTextureCanvas.getContext('2d', { willReadFrequently: true });
 		const pencilSetWidthHeight = Math.max(_width,_height);
 		pencilTextureCtx.drawImage(
 			pencilTextureEl,
@@ -180,7 +180,7 @@ const louvre = async ({img, outputCanvas, config, callback}) => {
 		// /*
 		// document.body.appendChild(canvasShade)
 
-		const ctxShade = canvasShade.getContext('2d');
+		const ctxShade = canvasShade.getContext('2d', { willReadFrequently: true });
 		const ctxShadeMin = canvasShadeMin.getContext('2d');
 		
 		canvasShade.width = _width;
